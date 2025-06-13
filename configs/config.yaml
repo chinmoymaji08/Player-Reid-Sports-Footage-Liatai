@@ -1,0 +1,78 @@
+# Player Re-Identification System Configuration
+# Liat.ai Assignment Configuration
+
+# Model Configuration
+model:
+  yolo_model_path: "path/to/your/yolo/model.pt"
+  feature_dim: 512
+  confidence_threshold: 0.5
+  nms_threshold: 0.4
+
+# Tracking Parameters
+tracking:
+  max_disappeared_frames: 30
+  similarity_threshold: 0.7
+  max_feature_distance: 0.5
+  feature_history_length: 10
+  position_history_length: 10
+  
+  # Feature fusion weights
+  appearance_weight: 0.7
+  spatial_weight: 0.3
+  
+  # Spatial matching parameters
+  position_weight: 5.0  # Higher = more strict position matching
+  
+# Cross-Camera Mapping
+cross_camera:
+  min_mapping_confidence: 0.6
+  temporal_window: 5  # frames to consider for mapping
+  use_spatial_constraints: true
+  
+# Video Processing
+video:
+  output_fps: null  # null to keep original fps
+  output_resolution: null  # null to keep original resolution
+  codec: 'mp4v'
+  
+# Visualization
+visualization:
+  bbox_color: [0, 255, 0]  # Green
+  bbox_thickness: 2
+  text_color: [0, 255, 0]
+  text_font: 'FONT_HERSHEY_SIMPLEX'
+  text_scale: 0.6
+  text_thickness: 2
+  
+  # Player ID colors (RGB)
+  player_colors:
+    - [255, 0, 0]    # Red
+    - [0, 255, 0]    # Green
+    - [0, 0, 255]    # Blue
+    - [255, 255, 0]  # Yellow
+    - [255, 0, 255]  # Magenta
+    - [0, 255, 255]  # Cyan
+    - [128, 0, 128]  # Purple
+    - [255, 165, 0]  # Orange
+    - [0, 128, 0]    # Dark Green
+    - [128, 128, 128] # Gray
+
+# Logging
+logging:
+  level: 'INFO'
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: 'player_reid.log'
+
+# Performance
+performance:
+  batch_size: 1
+  num_workers: 4
+  device: 'auto'  # 'auto', 'cpu', 'cuda'
+  optimize_for_speed: false
+  
+# Evaluation Metrics
+evaluation:
+  save_metrics: true
+  metrics_output_path: 'metrics.json'
+  calculate_mota: true
+  calculate_idf1: true
